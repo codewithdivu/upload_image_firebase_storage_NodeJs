@@ -11,15 +11,6 @@ const getAllImages = async (req, res) => {
   }
 };
 
-const createImage = async (url) => {
-  try {
-    const dudu = await Image.create(req.body);
-    res.status(200).json({ dudu });
-  } catch (error) {
-    res.status(400).send("there is some issues....");
-  }
-};
-
 const uploadImage = async (req, res) => {
   if (!req.file) {
     res.status(400).send("Error: No files found");
@@ -54,14 +45,27 @@ const uploadImage = async (req, res) => {
         }
         const dudu = await Image.create({ title: url });
         res.status(200).json({ dudu });
-        console.log("imageURLLL", url);
       }
     );
   }
 };
 
+const deleteImage = async (req, res) => {
+  const url = req.params.url;
+  const file = firebase.bucket.file("<file_path>");
+
+  file
+    .delete()
+    .then(() => {
+      console.log(`File deleted.`);
+    })
+    .catch((error) => {
+      console.error(`Error deleting file: ${error}`);
+    });
+};
+
 module.exports = {
   getAllImages,
-  createImage,
   uploadImage,
+  deleteImage,
 };

@@ -7,6 +7,7 @@ const {
   getAllImages,
   uploadImage,
   deleteImage,
+  updateImage,
 } = require("../controller/images");
 
 const upload = multer({
@@ -15,8 +16,7 @@ const upload = multer({
 
 router.post("/upload", upload.single("upload"), uploadImage);
 
-router.route("/upload").get(getAllImages);
-
-router.route("/upload/:url").delete(deleteImage);
+router.patch("/upload", upload.single("upload"), updateImage);
+router.route("/upload").get(getAllImages).delete(deleteImage);
 
 module.exports = router;

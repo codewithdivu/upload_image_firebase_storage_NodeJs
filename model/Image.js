@@ -1,7 +1,12 @@
 const mongoose = require("mongoose");
 
 const ImageSchema = mongoose.Schema({
-  title: {
+  imageUrl: {
+    type: String,
+    require: true,
+    
+  },
+  identifier: {
     type: String,
     require: true,
   },

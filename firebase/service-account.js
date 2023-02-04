@@ -7,6 +7,6 @@ admin.initializeApp({
   storageBucket: process.env.BUCKET_URL,
 });
 
-const bucket = admin.storage().bucket()
+const firebase = admin.storage().bucket();
 
-module.exports = {bucket};
+module.exports = { firebase };
